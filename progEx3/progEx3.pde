@@ -2,7 +2,7 @@ float xPos;
 float yPos;
 
 void setup() {
-  size(800,600);
+  size(1200,1000);
   xPos = 800;
   yPos = 40;
 }
