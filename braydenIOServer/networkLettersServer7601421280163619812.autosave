@@ -1,0 +1,31 @@
+Network net;
+String serverIP = "10.33.93.65"; //my IP
+
+String letters;
+
+void setup() {
+  size(1800, 400);
+  letters = "";
+  net = new Network(this);
+  net.startServer();
+}
+
+void draw() {
+    String s;
+    s = net.getNext();
+    if (s != null) {
+      letters += s;
+      net.broadcast(letters);
+    }
+    background(90);
+    textSize(160);
+    text("Server IP: " + serverIP, 20, 180);
+    textSize(60);
+    text(letters, 20, 360);
+}
+
+void keyPressed() {
+  if (key == 'z') {
+    letters = "";
+  }
+}
