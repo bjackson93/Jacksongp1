@@ -1,5 +1,5 @@
 Network net;
-String serverIP = "10.33.93.65";
+String serverIP = "10.33.93.175";
 Player players[];
 int numPlayers;
 int maxPlayers;

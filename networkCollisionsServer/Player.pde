@@ -6,8 +6,10 @@ class Player {
   int id;
   float radius;
   boolean eaten;
+  boolean isLeader;
+  String playerName;
 
-  Player(int id) {
+  Player(int id, String playerName) {
     x = random(0, width);
     y = random(0, height);
     xVelo = 0;
@@ -15,11 +17,13 @@ class Player {
     this.id = id;
     radius = random(10, 15);
     eaten = false;
+    isLeader = false;
+    this.playerName = playerName;
   }
 
   Player(String newPlayer) {
     String parts[] = split(newPlayer, ":");
-    if (parts.length != 7) {
+    if (parts.length != 9) {
       return;
     }
 
@@ -30,6 +34,8 @@ class Player {
     yVelo = float(parts[4]);
     radius = float(parts[5]);
     eaten = boolean(parts[6]);
+    isLeader = boolean(parts[7]);
+    playerName = (parts[8]);
   }
 
   String serialize() {
@@ -40,7 +46,9 @@ class Player {
       xVelo + ":" +
       yVelo + ":" +
       radius + ":" +
-      eaten;
+      eaten + ":" +
+      isLeader + ":" +
+      playerName;
   }
 
   void update() {
@@ -53,8 +61,7 @@ class Player {
   void display() {
     if (eaten) {
       fill(#ff0000);
-    }
-    else {
+    } else {
       fill(#002288);
     }
     ellipse(x, y, radius * 2, radius * 2);

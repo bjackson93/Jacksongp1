@@ -1,5 +1,5 @@
 Network net;
-String serverIP = "10.33.93.65"; //my IP
+String serverIP = "10.33.93.175"; //my IP
 Player players[];
 int numPlayers;
 int maxPlayers;
@@ -29,9 +29,10 @@ void draw() {
     return;
   }
   String parts[] = split(s, ":");
-  if (parts.length == 1) {
+  if (parts.length == 1
+  ) {
     if (parts[0].equals("new")) {
-      players[numPlayers] = new Player(numPlayers);
+      players[numPlayers] = new Player(numPlayers, parts[1]);
       net.broadcast(players[numPlayers].serialize());
       numPlayers++;
     }
@@ -47,7 +48,7 @@ void draw() {
     if (p.eaten) {
       return;
     }
-    
+
     if (type.equals("down")) {
       println("key pressed");
       p.keyPressed(key);
@@ -66,8 +67,7 @@ void draw() {
             p.radius += q.radius;
             q.eaten = true;
             net.broadcast(q.serialize());
-          }
-          else {
+          } else {
             q.radius += p.radius;
             p.eaten = true;
             net.broadcast(p.serialize());
@@ -89,4 +89,17 @@ Player getPlayerById(int id) {
   }
 
   return null;
+}
+
+void big() {
+  Player biggest = players[0];
+  for (Player p : players) {
+    p.isLeader = false;
+    if (p.radius > biggest.radius) {
+      biggest = p;
+    }
+    net.broadcast(p.serialize());
+  }
+  biggest.isLeader = true;
+  net.broadcast(biggest.serialize());
 }
