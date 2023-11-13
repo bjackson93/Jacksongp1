@@ -4,7 +4,6 @@ Player players[];
 int numPlayers;
 int maxPlayers;
 
-//Saucy Caboose
 
 void setup() {
   size(1600, 400);
@@ -32,7 +31,7 @@ void draw() {
   }
   String parts[] = split(s, ":");
   if (parts.length == 1
-  ) {
+    ) {
     if (parts[0].equals("new")) {
       players[numPlayers] = new Player(numPlayers, parts[1]);
       net.broadcast(players[numPlayers].serialize());
