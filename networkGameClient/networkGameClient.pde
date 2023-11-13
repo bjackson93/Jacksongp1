@@ -4,8 +4,8 @@ float x;
 
 void setup() {
   size(1800, 400);
-  net = new Network(this);
-  net.startClient(serverIP);
+  net = new Network(this); 
+  net.startClient(serverIP) ;
   x = 400;
 }
 
@@ -19,7 +19,6 @@ void draw() {
     x = float (letters);
   }
   if (x >= 1800) {
-
   }
 }
 
